@@ -3,6 +3,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
+<style>
+*{ margin:0; padding:0}
+#div1{ width:150px; height:150px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function(){
+	var div=document.getElementById("div1");
+	var a=document.body.clientWidth;
+	div.onmousedown=function(e){
+		var e=e ||window.event;
+		var x=e.clientX-div.offsetLeft;
+		var y=e.clientY-div.offsetTop;
+		document.onmousemove=function(e){
+			var e=e ||window.event;
+            var left=e.clientX-x;
+			var top=e.clientY-y;
+			if(left<0){left=0;}
+			if(left>a-div.offsetWidth){left=a-div.offsetWidth;}
+			div.style.left=left+'px';
+			div.style.top=top+'px';
+			}
+			document.onmouseup=function(){
+				document.onmousemove=null;
+				document.onmouseup=null;
+				}
+		}
+	}
+</script>
 </head>
 
 <body>
